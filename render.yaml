@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: foodtracker
+    runtime: node
+    buildCommand: npm install
+    startCommand: node index.js
+    envVars:
+      - key: PORT
+        value: 3000
+      - key: DATA_DIR
+        value: /data
+    disk:
+      name: foodtracker-data
+      mountPath: /data
+      sizeGB: 1
