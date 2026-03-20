@@ -1,0 +1,4 @@
+node_modules/
+data/foodtracker.db
+data/*.xlsx
+data/*.xls
