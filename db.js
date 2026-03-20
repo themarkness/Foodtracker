@@ -3,7 +3,10 @@ const path = require('path');
 const fs = require('fs');
 const ExcelJS = require('exceljs');
 
-const DB_PATH = path.join(__dirname, 'data', 'foodtracker.db');
+// On Render, DATA_DIR is the persistent disk mount path (/data).
+// Locally it defaults to ./data relative to the project root.
+const DATA_DIR = process.env.DATA_DIR || path.join(__dirname, 'data');
+const DB_PATH = path.join(DATA_DIR, 'foodtracker.db');
 
 let db;
 
@@ -60,8 +63,8 @@ async function importCoFID() {
     return;
   }
 
-  // Look for Excel file in /data directory
-  const dataDir = path.join(__dirname, 'data');
+  // Look for Excel file in the data directory
+  const dataDir = process.env.DATA_DIR || path.join(__dirname, 'data');
   const files = fs.readdirSync(dataDir).filter(f =>
     f.toLowerCase().endsWith('.xlsx') || f.toLowerCase().endsWith('.xls')
   );
